@@ -1,0 +1,18 @@
+.cell {
+  width: 20px;
+  height: 20px;
+  transition: background .3s ease-in-out;
+  &--wall {
+    background: $white;
+    outline: 1px solid $white;
+    z-index: 1;
+  }
+  &--empty {
+    background: #4c4d56;
+    border: 1px solid #797d8c;
+  }
+  &--filled {
+    background: #cc9ffb;
+    border: 1px solid #797d8c;
+  }
+}

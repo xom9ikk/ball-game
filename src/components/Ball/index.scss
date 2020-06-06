@@ -1,0 +1,11 @@
+.ball {
+  position: absolute;
+  background: #ac84e1;
+  border-radius: 50%;
+  z-index: 2;
+  background:radial-gradient(circle at 100px 100px, #ac84e1, #845cb9);
+  background-color: #ac84e1;
+  box-shadow: inset -25px -15px 40px rgba(0,0,0,.3);
+  background-image: linear-gradient(-45deg, rgba(255,255,220,.3) 0%, transparent 100%);
+  transition: left .3s ease-in-out, top .3s ease-in-out;
+}
