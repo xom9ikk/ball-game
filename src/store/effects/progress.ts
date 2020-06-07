@@ -1,6 +1,5 @@
+/* eslint-disable no-console */
 import { ProgressActions } from '../actions';
-import { IProgress } from '../../types';
-
 
 const restoreLevel = () => async (dispatch: Function) => {
   try {
@@ -28,6 +27,15 @@ const increaseLevel = (payload: number) => async (dispatch: Function) => {
   }
 };
 
+const decreaseLevel = (payload: number) => async (dispatch: Function) => {
+  try {
+    if (payload === 0) return;
+    dispatch(saveLevel(payload - 1));
+  } catch (error) {
+    console.error('restoreLevel', error);
+  }
+};
+
 const resetLevels = () => async (dispatch: Function) => {
   try {
     dispatch(saveLevel(0));
@@ -40,5 +48,6 @@ export const ProgressEffects = {
   restoreLevel,
   saveLevel,
   increaseLevel,
+  decreaseLevel,
   resetLevels,
 };

@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { MapsActions } from '../actions';
 
 

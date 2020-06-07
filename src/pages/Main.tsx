@@ -8,7 +8,7 @@ import {
   IColumn, IGrid, IRow, EnumCell as E, EnumTheme,
 } from '../types';
 import { IRootState } from '../store/reducers/state';
-import { Info } from '../components/Info';
+import { Controls } from '../components/Controls';
 import { ProgressActions } from '../store/actions';
 
 const getColumn = (data: IGrid, columnIndex: number) => data.map((row) => row[columnIndex]);
@@ -19,6 +19,10 @@ const setColumn = (data: IGrid, columnIndex: number, column: IColumn) => {
   });
   return data;
 };
+
+const random = (min: number, max: number) => Math.floor(
+  Math.random() * (Math.floor(max) - Math.ceil(min) + 1),
+) + Math.ceil(min);
 
 const maxSize = 800;
 
@@ -75,6 +79,7 @@ export const Main: FC = () => {
   const drawMap = () => {
     setGameFieldVisible(false);
     const animationDuration = 300;
+    // eslint-disable-next-line consistent-return
     setTimeout(() => {
       if (progress.level >= maps.length) {
         return dispatch(ProgressEffects.resetLevels());
@@ -202,18 +207,35 @@ export const Main: FC = () => {
     }
   }, [grid, dispatch]);
 
+  const prevHandler = () => {
+    dispatch(ProgressEffects.decreaseLevel(progress.level));
+  };
+
+  const nextHandler = () => {
+    dispatch(ProgressEffects.increaseLevel(progress.level));
+  };
+
+  const randomHandler = () => {
+    const randomLevel = random(0, maps.length - 1);
+    dispatch(ProgressEffects.saveLevel(randomLevel));
+  };
+
   return (
     <div className={`container ${theme}`}>
       <Header />
       <main>
-        <Info lvl={progress.level + 1} />
+        <Controls
+          lvl={progress.level + 1}
+          onPrev={prevHandler}
+          onNext={nextHandler}
+          onRandom={randomHandler}
+        />
         <GameField
           isVisible={gameFieldVisible}
           grid={grid}
           cellSize={cellSize}
           x={x}
           y={y}
-          level={progress.level}
         />
       </main>
     </div>

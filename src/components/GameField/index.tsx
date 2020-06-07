@@ -11,7 +11,6 @@ interface IGameField {
   cellSize: number;
   x: number;
   y: number;
-  level: number;
 }
 
 
@@ -24,7 +23,7 @@ const generateHSL = () => {
 };
 
 export const GameField: FC<IGameField> = ({
-  isVisible, grid, cellSize, x, y, level,
+  isVisible, grid, cellSize, x, y,
 }) => {
   const [filledColor, setFilledColor] = useState('');
   const [firstBallColor, setFirstBallColor] = useState('');

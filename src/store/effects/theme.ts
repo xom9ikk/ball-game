@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { ThemeActions } from '../actions';
 import { EnumTheme } from '../../types';
 

@@ -3,16 +3,4 @@
   &--wall {
     z-index: 1;
   }
-  &--empty {
-    border-left: 1px solid #797d8c;
-    border-top: 1px solid #797d8c;
-    //border-right: 1px solid #797d8c;
-    //border-bottom: 1px solid #797d8c;
-  }
-  &--filled {
-    border-left: 1px solid #797d8c;
-    border-top: 1px solid #797d8c;
-    //border-right: 1px solid #797d8c;
-    //border-bottom: 1px solid #797d8c;
-  }
 }

@@ -5,16 +5,11 @@ echo "server {
         server_name ball.xom9ik.com;
         client_max_body_size 10M;
 
-        #add_header Last-Modified \$date_gmt;
-        #add_header Cache-Control 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0';
-        #if_modified_since off;
-        #expires off;
-        #etag off;
         gzip_static on;
         gunzip on;
 
         location / {
-            proxy_pass http://172.50.10.1:8080;
+            proxy_pass http://172.50.11.1:8080;
             proxy_http_version 1.1;
             proxy_set_header Upgrade \$http_upgrade;
             proxy_set_header Connection 'upgrade';
