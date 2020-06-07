@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { EnumCell } from '../../types/cell';
+import { EnumCell } from '../../types';
 
 interface ICell {
   type: EnumCell;

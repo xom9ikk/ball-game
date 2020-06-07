@@ -2,45 +2,43 @@ import { ProgressActions } from '../actions';
 import { IProgress } from '../../types';
 
 
-const restoreProgress = () => async (dispatch: Function) => {
+const restoreLevel = () => async (dispatch: Function) => {
   try {
-    const progress = JSON.parse(localStorage.getItem('progress') || '');
-    dispatch(ProgressActions.setProgress(progress));
+    const level = JSON.parse(localStorage.getItem('level') || '');
+    dispatch(ProgressActions.setLevel(level));
   } catch (error) {
-    console.error('restoreProgress', error);
+    console.error('restoreLevel', error);
   }
 };
 
-const saveProgress = (payload: IProgress) => async (dispatch: Function) => {
+const saveLevel = (payload: number) => async (dispatch: Function) => {
   try {
-    localStorage.setItem('progress', JSON.stringify(payload));
-    dispatch(ProgressActions.setProgress(payload));
+    localStorage.setItem('level', JSON.stringify(payload));
+    dispatch(ProgressActions.setLevel(payload));
   } catch (error) {
-    console.error('saveProgress', error);
+    console.error('saveLevel', error);
   }
 };
 
-const increaseLevel = (payload: IProgress) => async (dispatch: Function) => {
+const increaseLevel = (payload: number) => async (dispatch: Function) => {
   try {
-    const newProgress = { ...payload, level: payload.level + 1 };
-    dispatch(saveProgress(newProgress));
+    dispatch(saveLevel(payload + 1));
   } catch (error) {
-    console.error('restoreProgress', error);
+    console.error('restoreLevel', error);
   }
 };
 
-const resetLevels = (payload: IProgress) => async (dispatch: Function) => {
+const resetLevels = () => async (dispatch: Function) => {
   try {
-    const newProgress = { ...payload, level: 0 };
-    dispatch(saveProgress(newProgress));
+    dispatch(saveLevel(0));
   } catch (error) {
-    console.error('restoreProgress', error);
+    console.error('resetLevels', error);
   }
 };
 
 export const ProgressEffects = {
-  restoreProgress,
-  saveProgress,
+  restoreLevel,
+  saveLevel,
   increaseLevel,
   resetLevels,
 };

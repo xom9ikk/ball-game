@@ -2,12 +2,14 @@ import React, { FC, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Header } from '../components/Header';
 import { GameField } from '../components/GameField';
-import { MapsEffects, ProgressEffects } from '../store/effects';
+import { MapsEffects, ProgressEffects, ThemeEffects } from '../store/effects';
 import { EnumKeyCodes } from '../types/keycodes';
-import { IColumn, IGrid, IRow } from '../types';
-import { EnumCell as E } from '../types/cell';
+import {
+  IColumn, IGrid, IRow, EnumCell as E, EnumTheme,
+} from '../types';
 import { IRootState } from '../store/reducers/state';
 import { Info } from '../components/Info';
+import { ProgressActions } from '../store/actions';
 
 const getColumn = (data: IGrid, columnIndex: number) => data.map((row) => row[columnIndex]);
 const setColumn = (data: IGrid, columnIndex: number, column: IColumn) => {
@@ -23,6 +25,8 @@ const maxSize = 800;
 export const Main: FC = () => {
   const maps = useSelector((state: IRootState) => state.maps);
   const progress = useSelector((state: IRootState) => state.progress);
+  const appTheme = useSelector((state: IRootState) => state.theme);
+  const theme = appTheme === EnumTheme.Dark ? 'container--dark' : 'container--light';
   const dispatch = useDispatch();
   const [gameFieldVisible, setGameFieldVisible] = useState(false);
   const [cellSize, setCellSize] = useState(0);
@@ -70,9 +74,10 @@ export const Main: FC = () => {
 
   const drawMap = () => {
     setGameFieldVisible(false);
+    const animationDuration = 300;
     setTimeout(() => {
       if (progress.level >= maps.length) {
-        return dispatch(ProgressEffects.resetLevels(progress));
+        return dispatch(ProgressEffects.resetLevels());
       }
       const {
         initialX, initialY, initialGrid,
@@ -84,15 +89,18 @@ export const Main: FC = () => {
       const columnLength = initialGrid.length;
       const size = rowLength > columnLength ? rowLength : columnLength;
       setCellSize(maxSize / size);
-    }, 300);
+    }, animationDuration);
     setTimeout(() => {
       setGameFieldVisible(true);
-    }, 600);
+    }, animationDuration * 2);
   };
 
   const calculateTargetPosition = (keyCode: EnumKeyCodes) => {
     if (isMovedRef.current) return;
     if (!gridRef.current?.length) return;
+    if (!progress.isFirstInteraction) {
+      dispatch(ProgressActions.setInteraction(true));
+    }
     setIsMoved(true);
     switch (keyCode) {
       case EnumKeyCodes.ArrowUp: {
@@ -175,39 +183,40 @@ export const Main: FC = () => {
 
   useEffect(() => {
     dispatch(MapsEffects.fetchMaps());
-    dispatch(ProgressEffects.restoreProgress());
+    dispatch(ProgressEffects.restoreLevel());
+    dispatch(ThemeEffects.restoreTheme());
   }, [dispatch]);
 
 
   useEffect(() => {
     if (!maps.length) return;
     drawMap();
-  }, [maps, progress]);
+  }, [maps, progress.level]);
 
   useEffect(() => {
     if (!grid) return;
     if (isFilled()) {
       setTimeout(() => {
-        dispatch(ProgressEffects.increaseLevel(progress));
+        dispatch(ProgressEffects.increaseLevel(progress.level));
       }, 400);
     }
   }, [grid, dispatch]);
 
   return (
-    <main>
-      <Header
-        title="Amaze Ball game"
-        subtitle="Swipe the ball to fill all the cells with color"
-      />
-      <Info lvl={progress.level + 1} />
-      <GameField
-        isVisible={gameFieldVisible}
-        grid={grid}
-        cellSize={cellSize}
-        x={x}
-        y={y}
-        level={progress.level}
-      />
-    </main>
+    <div className={`container ${theme}`}>
+      <Header />
+      <main>
+        <Info lvl={progress.level + 1} />
+        <GameField
+          isVisible={gameFieldVisible}
+          grid={grid}
+          cellSize={cellSize}
+          x={x}
+          y={y}
+          level={progress.level}
+        />
+      </main>
+    </div>
+
   );
 };

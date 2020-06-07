@@ -1,16 +1,22 @@
 import { createAction } from 'redux-actions';
-import { IProgress } from '../../types';
 
 enum Type {
-  SET_PROGRESS = 'PROGRESS/SET_PROGRESS',
+  SET_LEVEL = 'PROGRESS/SET_LEVEL',
+  SET_INTERACTION = 'PROGRESS/SET_INTERACTION',
 }
 
-const setProgress = createAction(
-  Type.SET_PROGRESS,
-  (payload: IProgress) => (payload),
+const setLevel = createAction(
+  Type.SET_LEVEL,
+  (payload: number) => ({ level: payload }),
+);
+
+const setInteraction = createAction(
+  Type.SET_INTERACTION,
+  (payload: boolean) => ({ isFirstInteraction: payload }),
 );
 
 export const ProgressActions = {
   Type,
-  setProgress,
+  setLevel,
+  setInteraction,
 };
