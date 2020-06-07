@@ -1,12 +1,10 @@
 import { handleActions } from 'redux-actions';
-import { CustomActions } from '../actions';
-import { ICustomInterface } from '../../types';
+import { MapsActions } from '../actions';
+import { IMap } from '../../types';
 
-const initialState = {
-  field: '',
-};
+const initialState: Array<IMap> = [];
 
-export const CustomReducer = handleActions<ICustomInterface, ICustomInterface>({
-  [CustomActions.Type.SET_CUSTOM]:
-        (state, action) => ({ field: action.payload.field }),
+export const MapsReducer = handleActions<Array<IMap>, Array<IMap>>({
+  [MapsActions.Type.SET_MAPS]:
+      (state, action) => (action.payload),
 }, initialState);

@@ -1,7 +1,6 @@
-import {
-  ICustomInterface,
-} from '../../types';
+import { IMap, IProgress } from '../../types';
 
 export interface IRootState {
-  custom: ICustomInterface,
+  maps: Array<IMap>,
+  progress: IProgress,
 }

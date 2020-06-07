@@ -1,16 +1,15 @@
 import { createAction } from 'redux-actions';
-import { ICustomInterface } from '../../types';
 
 enum Type {
-  SET_CUSTOM = 'CUSTOM/SET_CUSTOM',
+  SET_MAPS = 'MAPS/SET_MAPS',
 }
 
-const setCustom = createAction(
-  Type.SET_CUSTOM,
-  (payload: ICustomInterface) => ({ field: payload }),
+const setMaps = createAction(
+  Type.SET_MAPS,
+  (payload: Object) => payload,
 );
 
-export const CustomActions = {
+export const MapsActions = {
   Type,
-  setCustom,
+  setMaps,
 };

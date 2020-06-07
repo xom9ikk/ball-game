@@ -1,0 +1,11 @@
+.info {
+  font-family: "Nunito Semi Bold", sans-serif;
+  &__wrapper {
+    text-align: center;
+  }
+  &__text {
+    color: #666666;
+    font-size: 20px;
+    letter-spacing: 2px;
+  }
+}

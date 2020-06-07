@@ -1,7 +1,9 @@
 import { combineReducers } from 'redux';
 import { IRootState } from './state';
-import { CustomReducer } from './custom';
+import { MapsReducer } from './maps';
+import { ProgressReducer } from './progress';
 
 export const rootReducer = combineReducers<IRootState>({
-  custom: CustomReducer as any,
+  maps: MapsReducer as any,
+  progress: ProgressReducer as any,
 });
