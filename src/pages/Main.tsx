@@ -76,6 +76,8 @@ export const Main: FC = () => {
     return isValid;
   };
 
+  const copyMatrix = (data: IGrid) => data.map((row) => [...row]);
+
   const drawMap = () => {
     setGameFieldVisible(false);
     const animationDuration = 300;
@@ -89,7 +91,7 @@ export const Main: FC = () => {
       } = maps[progress.level];
       setX(initialX);
       setY(initialY);
-      setGrid(initialGrid);
+      setGrid(copyMatrix(initialGrid));
       const rowLength = initialGrid[0].length;
       const columnLength = initialGrid.length;
       const size = rowLength > columnLength ? rowLength : columnLength;
