@@ -172,6 +172,12 @@ export const Main: FC = () => {
   };
 
   const keydownHandler = (event: any) => {
+    if ([EnumKeyCodes.ArrowUp,
+      EnumKeyCodes.ArrowDown,
+      EnumKeyCodes.ArrowLeft,
+      EnumKeyCodes.ArrowRight].indexOf(event.key) > -1) {
+      event.preventDefault();
+    }
     switch (event.key) {
       case EnumKeyCodes.ArrowUp: { calculateTargetPosition(EnumKeyCodes.ArrowUp); break; }
       case EnumKeyCodes.ArrowDown: { calculateTargetPosition(EnumKeyCodes.ArrowDown); break; }
