@@ -5,8 +5,25 @@ echo "server {
         server_name ball.xom9ik.com;
         client_max_body_size 10M;
 
-        gzip_static on;
-        gunzip on;
+        gzip on;
+        gzip_disable \"msie6\";
+
+        gzip_comp_level 6;
+        gzip_min_length 1100;
+        gzip_buffers 16 8k;
+        gzip_proxied any;
+        gzip_types
+            text/plain
+            text/css
+            text/js
+            text/xml
+            text/javascript
+            application/javascript
+            application/x-javascript
+            application/json
+            application/xml
+            application/rss+xml
+            image/svg+xml/javascript;
 
         location / {
             proxy_pass http://172.50.11.1:8080;
@@ -31,6 +48,6 @@ server {
   listen 80;
   listen [::]:80;
   return 301 https://\$host\$request_uri;
-}" >> /etc/nginx/sites-enabled/$APP_NAME.conf
+}" > /etc/nginx/sites-enabled/$APP_NAME.conf
 sudo service nginx start
 sh ./rebuild.sh
