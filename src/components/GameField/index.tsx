@@ -15,6 +15,7 @@ interface IGameField {
 
 
 const randomInt = (min: number, max: number) => Math.floor(Math.random() * (max - min + 1)) + min;
+
 const generateHSL = () => {
   const h = randomInt(0, 360);
   const s = randomInt(50, 90);
@@ -28,30 +29,32 @@ export const GameField: FC<IGameField> = ({
   const [filledColor, setFilledColor] = useState('');
   const [firstBallColor, setFirstBallColor] = useState('');
   const [secondBallColor, setSecondBallColor] = useState('');
+
   useEffect(() => {
     const [h, s, l] = generateHSL();
     setFilledColor(`hsl(${h},${s}%,${l}%)`);
     setFirstBallColor(`hsl(${h},${s - 10}%,${l}%)`);
     setSecondBallColor(`hsl(${h},${s - 5}%,${l - 5}%)`);
   }, [cellSize]);
+
   return (
     <div className={`game-field ${!isVisible ? 'game-field--invisible' : ''}`}>
       {
-          grid && grid.map((row: IRow, iRow: number) => (
-            <Row key={`row-${iRow}`}>
-              {
-                  row.map((cell, iCell: number) => (
-                    <Cell
-                      key={`cell-${iCell}`}
-                      type={cell}
-                      width={cellSize}
-                      height={cellSize}
-                      filledColor={filledColor}
-                    />
-                  ))
-                }
-            </Row>
-          ))
+        grid && grid.map((row: IRow, iRow: number) => (
+          <Row key={`row-${iRow}`}>
+            {
+              row.map((cell, iCell: number) => (
+                <Cell
+                  key={`cell-${iCell}`}
+                  type={cell}
+                  width={cellSize}
+                  height={cellSize}
+                  filledColor={filledColor}
+                />
+              ))
+            }
+          </Row>
+        ))
         }
       <Ball
         size={cellSize}

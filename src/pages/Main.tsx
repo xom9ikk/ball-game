@@ -10,8 +10,10 @@ import {
 import { IRootState } from '../store/reducers/state';
 import { Controls } from '../components/Controls';
 import { ProgressActions } from '../store/actions';
+import { useFieldSize } from '../use/fieldSize';
 
 const getColumn = (data: IGrid, columnIndex: number) => data.map((row) => row[columnIndex]);
+
 const setColumn = (data: IGrid, columnIndex: number, column: IColumn) => {
   column.forEach((cell: E, index) => {
     // eslint-disable-next-line no-param-reassign
@@ -24,24 +26,29 @@ const random = (min: number, max: number) => Math.floor(
   Math.random() * (Math.floor(max) - Math.ceil(min) + 1),
 ) + Math.ceil(min);
 
-const maxSize = 800;
+// const maxSize = 800;
 
 export const Main: FC = () => {
+  const dispatch = useDispatch();
+  const { fieldSize } = useFieldSize();
+
   const maps = useSelector((state: IRootState) => state.maps);
   const progress = useSelector((state: IRootState) => state.progress);
   const appTheme = useSelector((state: IRootState) => state.theme);
-  const theme = appTheme === EnumTheme.Dark ? 'container--dark' : 'container--light';
-  const dispatch = useDispatch();
+
   const [gameFieldVisible, setGameFieldVisible] = useState(false);
   const [cellSize, setCellSize] = useState(0);
   const [x, _setX] = useState(0);
   const [y, _setY] = useState(0);
   const [isMoved, _setIsMoved] = useState(false);
   const [grid, _setGrid] = useState();
+
   const xRef = React.useRef(x);
   const yRef = React.useRef(y);
   const isMovedRef = React.useRef(isMoved);
   const gridRef = React.useRef(grid);
+
+  const theme = appTheme === EnumTheme.Dark ? 'container--dark' : 'container--light';
 
   const setX = (value: number) => {
     xRef.current = value;
@@ -95,7 +102,7 @@ export const Main: FC = () => {
       const rowLength = initialGrid[0].length;
       const columnLength = initialGrid.length;
       const size = rowLength > columnLength ? rowLength : columnLength;
-      setCellSize(maxSize / size);
+      setCellSize(fieldSize / size);
     }, animationDuration);
     setTimeout(() => {
       setGameFieldVisible(true);
@@ -204,7 +211,7 @@ export const Main: FC = () => {
   useEffect(() => {
     if (!maps.length) return;
     drawMap();
-  }, [maps, progress.level]);
+  }, [fieldSize, maps, progress.level]);
 
   useEffect(() => {
     if (!grid) return;
@@ -247,6 +254,5 @@ export const Main: FC = () => {
         />
       </main>
     </div>
-
   );
 };

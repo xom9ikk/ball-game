@@ -1,0 +1,49 @@
+$first-breakpoint: 968px;
+$second-breakpoint: 700px;
+$third-breakpoint: 480px;
+
+@media screen and (max-width: $first-breakpoint) {
+  .header {
+    height: 80px;
+  }
+  .controls {
+    margin-bottom: 20px;
+  }
+}
+
+@media screen and (max-width: $second-breakpoint) {
+  .header {
+    height: 60px;
+  }
+  .controls {
+    &__button {
+      padding: 9px;
+      margin: 0 10px;
+    }
+    &__text {
+      width: 130px;
+      font-size: 20px;
+    }
+  }
+}
+
+@media screen and (max-width: $third-breakpoint) {
+  .logo--menu-open {
+    flex: 0;
+    opacity: 0;
+  }
+  .controls {
+    &__button {
+      padding: 6px;
+      margin: 0 5px;
+      img {
+        width: 20px;
+        height: 20px;
+      }
+    }
+    &__text {
+      width: 80px;
+      font-size: 10px;
+    }
+  }
+}

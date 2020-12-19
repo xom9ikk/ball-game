@@ -1,8 +1,13 @@
 .game-field {
   position: relative;
-  border-radius: 0px;
   opacity: 1;
   transition: opacity .3s ease-in-out;
+  //border: 10px solid #d9d9d9;
+  //border-radius: 5px;
+  //box-shadow: 20px 20px 60px #d9d9d9, -20px -20px 60px #f4f4f4;
+  //background: #fff;
+  //box-shadow: inset 20px 20px 60px #d9d9d9,
+  //inset -20px -20px 60px #ffffff;
   &--invisible {
     opacity: 0;
   }
