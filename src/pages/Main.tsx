@@ -256,7 +256,7 @@ export const Main: FC = () => {
   return (
     <div className={`container ${theme}`}>
       <Header />
-      <main>
+      <main {...gestureHandlers}>
         <Controls
           lvl={progress.level + 1}
           onPrev={prevHandler}
@@ -267,7 +267,6 @@ export const Main: FC = () => {
           isVisible={gameFieldVisible}
           grid={grid}
           cellSize={cellSize}
-          gestureHandlers={gestureHandlers}
           x={x}
           y={y}
         />
