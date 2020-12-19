@@ -37,32 +37,32 @@
       animation: slide-left .35s ease-in-out;
       border-top-right-radius: 100%;
       border-bottom-right-radius: 100%;
-      border-top-left-radius: 30px;
-      border-bottom-left-radius: 30px;
+      border-top-left-radius: var(--ball-size);
+      border-bottom-left-radius: var(--ball-size);
     }
 
     &--right {
       animation: slide-right .35s ease-in-out;
       border-top-left-radius: 100%;
       border-bottom-left-radius: 100%;
-      border-top-right-radius: 30px;
-      border-bottom-right-radius: 30px;
+      border-top-right-radius: var(--ball-size);
+      border-bottom-right-radius: var(--ball-size);
     }
 
     &--top {
       animation: slide-top .35s ease-in-out;
       border-bottom-left-radius: 100%;
       border-bottom-right-radius: 100%;
-      border-top-left-radius: 30px;
-      border-top-right-radius: 30px;
+      border-top-left-radius: var(--ball-size);
+      border-top-right-radius: var(--ball-size);
     }
 
     &--bottom {
       animation: slide-bottom .35s ease-in-out;
       border-top-left-radius: 100%;
       border-top-right-radius: 100%;
-      border-bottom-left-radius: 30px;
-      border-bottom-right-radius: 30px;
+      border-bottom-left-radius: var(--ball-size);
+      border-bottom-right-radius: var(--ball-size);
     }
   }
 }

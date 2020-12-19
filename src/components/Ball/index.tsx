@@ -73,6 +73,7 @@ export const Ball: FC<IBall> = ({
             backgroundColor: secondBallColor,
             // @ts-ignore
             '--animation-size': `${animationSize.current}px`,
+            '--ball-size': `${size * 0.75}px`,
           }}
         />
         <div
