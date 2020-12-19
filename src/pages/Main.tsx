@@ -176,7 +176,7 @@ export const Main: FC = () => {
     }
     setTimeout(() => {
       setIsMoved(false);
-    }, 200);
+    }, 300);
   };
 
   const keydownHandler = (event: any) => {
