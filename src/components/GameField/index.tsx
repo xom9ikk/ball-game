@@ -9,6 +9,7 @@ interface IGameField {
   isVisible: boolean,
   grid: IGrid,
   cellSize: number;
+  gestureHandlers: Object;
   x: number;
   y: number;
 }
@@ -24,7 +25,7 @@ const generateHSL = () => {
 };
 
 export const GameField: FC<IGameField> = ({
-  isVisible, grid, cellSize, x, y,
+  isVisible, grid, cellSize, gestureHandlers, x, y,
 }) => {
   const [filledColor, setFilledColor] = useState('');
   const [firstBallColor, setFirstBallColor] = useState('');
@@ -38,7 +39,7 @@ export const GameField: FC<IGameField> = ({
   }, [cellSize]);
 
   return (
-    <div className={`game-field ${!isVisible ? 'game-field--invisible' : ''}`}>
+    <div {...gestureHandlers} className={`game-field ${!isVisible ? 'game-field--invisible' : ''}`}>
       {
         grid && grid.map((row: IRow, iRow: number) => (
           <Row key={`row-${iRow}`}>

@@ -1,5 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useSwipeable } from 'react-swipeable';
 import { Header } from '../components/Header';
 import { GameField } from '../components/GameField';
 import { MapsEffects, ProgressEffects, ThemeEffects } from '../store/effects';
@@ -194,6 +195,23 @@ export const Main: FC = () => {
     }
   };
 
+  const gestureHandlers = useSwipeable({
+    onSwipedLeft: () => {
+      calculateTargetPosition(EnumKeyCodes.ArrowLeft);
+    },
+    onSwipedRight: () => {
+      calculateTargetPosition(EnumKeyCodes.ArrowRight);
+    },
+    onSwipedUp: () => {
+      calculateTargetPosition(EnumKeyCodes.ArrowUp);
+    },
+    onSwipedDown: () => {
+      calculateTargetPosition(EnumKeyCodes.ArrowDown);
+    },
+    preventDefaultTouchmoveEvent: true,
+    trackMouse: true,
+  });
+
   useEffect(() => {
     document.addEventListener('keydown', keydownHandler);
     return () => {
@@ -249,6 +267,7 @@ export const Main: FC = () => {
           isVisible={gameFieldVisible}
           grid={grid}
           cellSize={cellSize}
+          gestureHandlers={gestureHandlers}
           x={x}
           y={y}
         />
