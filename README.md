@@ -12,7 +12,7 @@ There is a **map** on which there is a **ball** that paints all the **cells** on
 The goal of the game is to color all the cells on the map. 
 After passing the map, you go to a new level.
 
-## How are maps generated?
+## 🔭 How are maps generated?
 To generate maps, an algorithm is used that generates a random number of cells in the range. 
 After that, the walls `break through` and cells are obtained, along which the ball can then move. 
 The generation doesn't end there. 
