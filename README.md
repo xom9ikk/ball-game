@@ -1,44 +1,56 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<p align="center">
+  <a href='https://ball.xom9ik.com'>Amaze Ball Game</a>
+</p>
+<p align="center"><img src='https://github.com/xom9ikk/ball-game/raw/master/screenshots/main.png' alt='Ball Screenshot' aria-label='ball.xom9ik.com' /></p>
 
-## Available Scripts
+# For users 😀
 
-In the project directory, you can run:
+## 🧶 How to play?
+Ball is a game that is very addictive in its simplicity.
+You only need 4 movements or 4 keys on the keyboard to play.
+There is a **map** on which there is a **ball** that paints all the **cells** on which it rolled.
+The goal of the game is to color all the cells on the map. 
+After passing the map, you go to a new level.
 
-### `yarn start`
+## How are maps generated?
+To generate maps, an algorithm is used that generates a random number of cells in the range. 
+After that, the walls `break through` and cells are obtained, along which the ball can then move. 
+The generation doesn't end there. 
+After that, the verification algorithm starts, because not all generated maps can have a finite number of movements to fill all cells of the map. 
+If the map was successfully painted over for a large number of `monkey` movements, then the map is considered usable. 
+After that, all maps that have reached this stage are sorted by the average number of `monkey` movements to complete the map.
+Thus, at the beginning are the maps that had the least difficulty.
+And the more levels the player goes through, the more the map has a higher level of difficulty.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+# For developers 🤔
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Installation and Development server
 
-### `yarn test`
+Clone repo
+```bash
+$ git clone https://github.com/xom9ikk/ball-game.git
+```
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Install the dependencies
+```bash
+$ npm i
+```
 
-### `yarn build`
+Run in `dev` mode with hot reload. `dev` server will run at `http://localhost:3000`
+```bash
+$ npm run start
+```
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Build for `production`. Static files will be created in `dist` folder.
+```bash
+$ npm run build
+```
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+Build map file
+```bash
+$ node ./generator/cluster.js 
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## License
 
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+[MIT](LICENSE.md)
