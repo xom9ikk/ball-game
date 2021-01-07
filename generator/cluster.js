@@ -11,10 +11,6 @@ if (cluster.isMaster) {
   console.log(`Master started. Pid: ${pid}. CPUs count: ${cpusCount}`);
   for (let i = 0; i < cpusCount - 1; i += 1) {
     cluster.fork();
-    // worker.send('Hello from server');
-    // worker.on('message', (message) => {
-    //   console.log(`Mesaage from worker ${worker.process.pid}: ${message.text} ${message.pid}`);
-    // });
   }
 
   cluster.on('exit', (worker, code) => {

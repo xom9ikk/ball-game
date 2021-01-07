@@ -1,4 +1,11 @@
-const {getRandomInt, getColumn, setColumn,copyMatrix, checkValid, write, E} = require('./helper');
+const {
+  getRandomInt,
+  getColumn,
+  setColumn,
+  copyMatrix,
+  checkValid,
+  EnumCellType,
+} = require('./helper');
 
 class Generator {
   constructor(p, options) {
@@ -25,9 +32,9 @@ class Generator {
         case 0: { // up
           const column = getColumn(grid, x);
           let count = y;
-          while ((column[count] === E.Empty || column[count] === E.Filled)
+          while ((column[count] === EnumCellType.Empty || column[count] === EnumCellType.Filled)
             ) {
-            column[count] = E.Filled;
+            column[count] = EnumCellType.Filled;
             count -= 1;
           }
           grid = setColumn([...grid], x, column);
@@ -37,9 +44,9 @@ class Generator {
         case 1: { // down
           const column = getColumn(grid, x);
           let count = y;
-          while ((column[count] === E.Empty || column[count] === E.Filled)
+          while ((column[count] === EnumCellType.Empty || column[count] === EnumCellType.Filled)
             ) {
-            column[count] = E.Filled;
+            column[count] = EnumCellType.Filled;
             count += 1;
           }
           grid = setColumn([...grid], x, column);
@@ -49,9 +56,9 @@ class Generator {
         case 2: { // left
           const row = grid[y];
           let count = x;
-          while ((row[count] === E.Empty || row[count] === E.Filled)
+          while ((row[count] === EnumCellType.Empty || row[count] === EnumCellType.Filled)
             ) {
-            row[count] = E.Filled;
+            row[count] = EnumCellType.Filled;
             count -= 1;
           }
           // if (count + 1 < columns - 1) {
@@ -65,9 +72,9 @@ class Generator {
         case 3: { // right
           const row = grid[y];
           let count = x;
-          while ((row[count] === E.Empty || row[count] === E.Filled)
+          while ((row[count] === EnumCellType.Empty || row[count] === EnumCellType.Filled)
             ) {
-            row[count] = E.Filled;
+            row[count] = EnumCellType.Filled;
             count += 1;
           }
           const newGrid = [...grid];
@@ -94,14 +101,14 @@ class Generator {
     const columns = getRandomInt(this.size.min, this.size.max);
     const initialGrid = [];
     for (let i = 0; i < rows; i += 1) {
-      initialGrid[i] = new Array(columns).fill(E.Wall);
+      initialGrid[i] = new Array(columns).fill(EnumCellType.Wall);
     }
     const maxSlide = getRandomInt(this.slides.min, this.slides.max);
     let x = getRandomInt(0, rows - 1); // select row
     let y = getRandomInt(0, columns - 1); // select col
     const initialY = x;
     const initialX = y;
-    initialGrid[x][y] = E.Empty;
+    initialGrid[x][y] = EnumCellType.Empty;
 
     for (let i = 0; i < maxSlide; i += 1) {
       const direction = getRandomInt(0, 3);
@@ -110,7 +117,7 @@ class Generator {
           const newX = getRandomInt(0, x - 1);
           if (newX >= 0) {
             for (let j = newX; j < x; j += 1) {
-              initialGrid[j][y] = E.Empty;
+              initialGrid[j][y] = EnumCellType.Empty;
             }
             x = newX;
           }
@@ -120,7 +127,7 @@ class Generator {
           const newX = getRandomInt(x + 1, rows - 1);
           if (newX <= rows) {
             for (let j = x; j <= newX; j += 1) {
-              initialGrid[j][y] = E.Empty;
+              initialGrid[j][y] = EnumCellType.Empty;
             }
             x = newX;
           }
@@ -130,7 +137,7 @@ class Generator {
           const newY = getRandomInt(0, y - 1);
           if (newY >= 0) {
             for (let j = newY; j < y; j += 1) {
-              initialGrid[x][j] = E.Empty;
+              initialGrid[x][j] = EnumCellType.Empty;
             }
             y = newY;
           }
@@ -140,7 +147,7 @@ class Generator {
           const newY = getRandomInt(y + 1, columns - 1);
           if (newY <= columns) {
             for (let j = y; j <= newY; j += 1) {
-              initialGrid[x][j] = E.Empty;
+              initialGrid[x][j] = EnumCellType.Empty;
             }
             y = newY;
           }
@@ -169,16 +176,6 @@ class Generator {
             initialGrid: copyMatrix(initialGrid),
           };
         this.process.send(JSON.stringify(map));
-        // result.push({
-        //   moves: Math.ceil(totalMoves / confirmMap),
-        //   initialX,
-        //   initialY,
-        //   initialGrid: copyMatrix(initialGrid),
-        // })
-        // const sorted = [...result];
-        // sorted.sort((a,b)=>a.moves-b.moves);
-        // console.log(`Attempt: ${count} Total maps: ${sorted.length}`);
-        // write(filename, JSON.stringify(sorted));
       }
     }
     return isValid;

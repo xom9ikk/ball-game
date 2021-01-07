@@ -1,7 +1,7 @@
-const random = require('random')
 const fs = require('fs');
+const random = require('random')
 
-const E = {
+const EnumCellType = {
   Wall: 0,
   Empty: 1,
   Filled: 2,
@@ -30,7 +30,7 @@ const checkValid = (grid) => {
   let isValid = true;
   for (let i = 0; i < grid.length; i += 1) {
     for (let j = 0; j < grid[i].length; j += 1) {
-      if (grid[i][j] === E.Empty) {
+      if (grid[i][j] === EnumCellType.Empty) {
         isValid = false;
         break;
       }
@@ -44,5 +44,5 @@ const write = (filename, data) => {
 }
 
 module.exports = {
-  getRandomInt, getColumn, setColumn,copyMatrix, checkValid, write, E
+  getRandomInt, getColumn, setColumn,copyMatrix, checkValid, write, EnumCellType,
 }
