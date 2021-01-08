@@ -26,7 +26,6 @@
   "bugs": {
     "url": "https://github.com/xom9ikk/ball-game/issues"
   },
-  "homepage": "https://github.com/xom9ikk/ball-game#readme",
   "eslintConfig": {
     "extends": "react-app"
   },
