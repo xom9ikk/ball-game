@@ -2,6 +2,7 @@ version: "3.5"
 services:
   ball-prod:
     image: ball-prod
+    restart: always
     container_name: ball-prod
     build:
       context: ./
